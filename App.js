@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Card from "./src/components/card";
 
 const nhost = new NhostClient({
   subdomain: "wwgsiqjwetcrvgptnyta",
@@ -27,6 +28,7 @@ export default function App() {
         tags
         content
         preview
+        regex
       }
     }
   `;
@@ -63,7 +65,7 @@ export default function App() {
       <TextInput
         selectionColor={"#000"}
         underlineColorAndroid={"#000"}
-        className="py-6 px-4 w-56 text-xl bg-white mt-8 mb-4"
+        className="px-2 py-4 w-56 font-medium text-xl bg-white mt-8 mb-4"
         placeholder="find your match"
         onChangeText={(newText) => setText(newText)}
         defaultValue={text}
@@ -72,11 +74,21 @@ export default function App() {
       {/* <ActivityIndicator size="large" /> */}
       <FlatList
         data={patternList}
+        numColumns={2}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => index.toString()}
+        horizontal={false} 
+        columnWrapperStyle={{justifyContent: 'space-between', flex: 1}} 
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => console.log(item.name)}>
-            <Text className="text-xl text-left font-bold py-2 px-8">
-              {item.name} : {item.preview}
+          <Card className="w-1/2 max-w-1/2 my-2 h-24">
+            <Text className="text-xl w-36">
+              {item.name}
             </Text>
+            <Text className="text-xs text-slate-400 font-medium py-2">
+              Click to open
+            </Text>
+          </Card>
           </TouchableOpacity>
         )}
       />
@@ -87,19 +99,5 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  item: {
-    fontSize: 18,
-    fontWeight: "500",
-    paddingHorizontal: 15,
-  },
-  
-  textInput: {
-    padding: 12,
-    fontSize: 18.0,
-    backgroundColor: "#fff",
-    marginVertical: 5,
-    height: 75,
-    width: 250,
-    marginVertical: 10
-  },
+
 });
