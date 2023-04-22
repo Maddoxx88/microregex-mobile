@@ -59,11 +59,11 @@ export default function App() {
 
   return (
     // <NhostReactProvider nhost={nhost}>
-    <View style={styles.container}>
+    <View className="flex-1 items-center justify-center bg-white">
       <TextInput
         selectionColor={"#000"}
         underlineColorAndroid={"#000"}
-        style={styles.textInput}
+        className="py-6 px-4 w-56 text-xl bg-white mt-8 mb-4"
         placeholder="find your match"
         onChangeText={(newText) => setText(newText)}
         defaultValue={text}
@@ -74,7 +74,7 @@ export default function App() {
         data={patternList}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => console.log(item.name)}>
-            <Text style={styles.item}>
+            <Text className="text-xl text-left font-bold py-2 px-8">
               {item.name} : {item.preview}
             </Text>
           </TouchableOpacity>
@@ -87,21 +87,14 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 22,
-    justifyContent: "center",
-    flexDirection: "column",
-    alignItems: "center",
-  },
   item: {
     fontSize: 18,
     fontWeight: "500",
     paddingHorizontal: 15,
   },
+  
   textInput: {
     padding: 12,
-    width: "100%",
     fontSize: 18.0,
     backgroundColor: "#fff",
     marginVertical: 5,
