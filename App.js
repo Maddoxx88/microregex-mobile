@@ -2,9 +2,11 @@ import { gql } from "@apollo/client";
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { NhostClient } from "@nhost/nhost-js";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FlatList,
+  Platform,
+  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -47,6 +49,7 @@ export default function App() {
 
   console.log("sfsfsf");
   const url = nhost.graphql.getUrl();
+  const inputRef = useRef(text);
 
   useEffect(() => {
     async function anyNameFunction() {
@@ -62,23 +65,27 @@ export default function App() {
 
   return (
     // <NhostReactProvider nhost={nhost}>
-    <View className="flex-1 items-center justify-center bg-white">
+    <SafeAreaView className="flex-1 items-center justify-center bg-white pt-12">
                 <Text className="text-center text-xl w-36">
               microregex
             </Text>
-    <View className="flex bg-[#00000014] justify-center flex-row items-center mt-10 mb-4 rounded-xl px-4 focus:bg-white focus:border-2 focus:border-[#1967d2]">
+    <View className="flex bg-[#00000014] justify-center flex-row items-center mt-4 mb-4 rounded-xl px-4 focus:bg-white focus:border-2 focus:border-[#1967d2]">
     <Ionicons color="#0000008c" selectionColor="#1967d2" name="ios-search" size={24} className="m-2" />
     <TextInput
-            selectionColor={"#0000008c"}
+    ref={inputRef}
+            selectionColor="#0000008c"
         underlineColorAndroid="transparent"
-        className="px-2 py-2 w-56 font-semibold text-lg text-[##0000008c] focus:bg-white focus:text-[##0000008c]"
+        className=" px-2 py-2 w-56 font-semibold text-lg text-[#0000008c] focus:bg-white focus:text-[#0000008c]"
         placeholder="find your match"
         onChangeText={(newText) => setText(newText)}
         defaultValue={text}
         onChange={handleSearch}
-        color
+        placeholderTextColor="#6161618c"
     />
-    <MaterialIcons name="cancel" size={24} color="#0000008c" onPress={() => console.log("pressed")} />
+    <MaterialIcons name="cancel" size={24} color="#0000008c" onPress={() => {
+      setText("")
+      inputRef.current.blur()
+      }} />
 </View>
       {/* <TextInput
         selectionColor={"#000"}
@@ -98,7 +105,9 @@ export default function App() {
         horizontal={false} 
         columnWrapperStyle={{justifyContent: 'space-between', flex: 1}} 
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => console.log(item.name)}>
+          <TouchableOpacity onPress={() => {
+            console.log(item.name)
+            }}>
           <Card className="w-1/2 max-w-1/2 my-2 h-24">
             <Text className="text-xl w-36">
               {item.name}
@@ -111,7 +120,7 @@ export default function App() {
         )}
       />
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
     // </NhostReactProvider>
   );
 }
@@ -135,5 +144,9 @@ textInput: {
     paddingLeft: 0,
     backgroundColor: '#fff',
     color: '#424242',
+},
+droidSafeArea: {
+  flex: 1,
+  paddingTop: Platform.OS === 'android' ? 25 : 0
 },
 });
