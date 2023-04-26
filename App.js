@@ -1,17 +1,20 @@
 import { gql } from "@apollo/client";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import BottomSheet from '@gorhom/bottom-sheet';
 import { NhostClient } from "@nhost/nhost-js";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
+  Button,
   FlatList,
+  Image,
   Platform,
   SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import Card from "./src/components/card";
 
@@ -47,9 +50,17 @@ export default function App() {
     setPatternList(newList);
   };
 
+  const handleOpenPress = () => bottomSheetRef.current.snapToIndex(1);
+  const handleClosePress = () => bottomSheetRef.current.close();
+
   console.log("sfsfsf");
   const url = nhost.graphql.getUrl();
   const inputRef = useRef(text);
+    // ref
+    const bottomSheetRef = useRef();
+
+    // variables
+    const snapPoints = useMemo(() => ['25%', '50%'], []);
 
   useEffect(() => {
     async function anyNameFunction() {
@@ -63,12 +74,19 @@ export default function App() {
     anyNameFunction();
   }, [nhost.graphql]);
 
+  const handleSheetChanges = useCallback((index) => {
+    console.log('handleSheetChanges', index);
+  }, []);
+
   return (
     // <NhostReactProvider nhost={nhost}>
     <SafeAreaView className="flex-1 items-center justify-center bg-white pt-12">
-      <Text className="text-center text-base font-bold w-auto">logo here</Text>
+      <Image
+        className="w-12 h-12"
+        source={require('./assets/icon.png')}
+      />
       <Text className="text-center text-xs my-2 w-auto">search for your favourite regex pattern</Text>
-      <View className="flex bg-[#00000014] justify-center flex-row items-center mt-4 mb-4 rounded-xl px-4 focus:bg-white focus:border-2 focus:border-[#1967d2]">
+      <View className="flex bg-[#00000014] justify-center flex-row items-center mt-4 mb-4 rounded-xl px-4 border-2 border-transparent transform transition duration-700 ease-in-out focus:bg-white focus:border-2 focus:border-[#1967d2]">
         <Ionicons
           color="#0000008c"
           selectionColor="#1967d2"
@@ -87,19 +105,20 @@ export default function App() {
           onChange={handleSearch}
           placeholderTextColor="#6161618c"
         />
-        <MaterialIcons
+        { text.length > 0 && <MaterialIcons
           name="cancel"
           size={24}
-          color="#0000008c"
+          color="#000"
           onPress={() => {
             setText("");
             inputRef.current.blur();
           }}
-        />
+        />} 
       </View>
       <View
       className="flex-row bg-slate-300 my-4 h-px w-56"
 />
+<Button title="Open Sheet" onPress={handleOpenPress} />
       {/* <TextInput
         selectionColor={"#000"}
         underlineColorAndroid={"#000"}
@@ -133,6 +152,18 @@ export default function App() {
         )}
       />
       <StatusBar style="auto" />
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={-1}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+        back
+      >
+        <View style={styles.contentContainer}>
+          <Text>Awesome 🎉</Text>
+          <Button title="Close Sheet" onPress={handleClosePress} />
+        </View>
+      </BottomSheet>
     </SafeAreaView>
     // </NhostReactProvider>
   );
