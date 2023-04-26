@@ -1,14 +1,13 @@
 ## microregex mobile app
 
----
+Tasks - 
 
-todo
-
-[ ] Modify text input box with icon (zomato, dunzo)
-[ ] Handle empty search
-[ ] Search using filters
-[ ] Debouncing in react native
-[ ] Details page for a pattern
-[ ] Copy regex functionality
-[ ] Share regex
-[ ] Splashscreen (maybe animated?)
+- [ ] Modify text input box with icon (zomato, dunzo)
+- [ ] Handle empty search
+- [ ] Search using filters
+- [ ] Implement debouncing for the search results
+- [ ] Details page for a pattern
+- [ ] Copy regex functionality
+- [ ] Share regex on social apps
+- [ ] Share a photo/screenshot of the regex pattern
+- [ ] Splashscreen (maybe animated?)
