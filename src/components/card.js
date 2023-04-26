@@ -7,7 +7,7 @@ const Card = props => {
 };
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: 'white',
+    backgroundColor: '#f7f7f7',
     elevation: 0,
     padding: 12,
     borderRadius: 5,

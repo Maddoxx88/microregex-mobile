@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { NhostClient } from "@nhost/nhost-js";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useRef, useState } from "react";
@@ -11,7 +11,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import Card from "./src/components/card";
 
@@ -66,27 +66,40 @@ export default function App() {
   return (
     // <NhostReactProvider nhost={nhost}>
     <SafeAreaView className="flex-1 items-center justify-center bg-white pt-12">
-                <Text className="text-center text-xl w-36">
-              microregex
-            </Text>
-    <View className="flex bg-[#00000014] justify-center flex-row items-center mt-4 mb-4 rounded-xl px-4 focus:bg-white focus:border-2 focus:border-[#1967d2]">
-    <Ionicons color="#0000008c" selectionColor="#1967d2" name="ios-search" size={24} className="m-2" />
-    <TextInput
-    ref={inputRef}
-            selectionColor="#0000008c"
-        underlineColorAndroid="transparent"
-        className=" px-2 py-2 w-56 font-semibold text-lg text-[#0000008c] focus:bg-white focus:text-[#0000008c]"
-        placeholder="find your match"
-        onChangeText={(newText) => setText(newText)}
-        defaultValue={text}
-        onChange={handleSearch}
-        placeholderTextColor="#6161618c"
-    />
-    <MaterialIcons name="cancel" size={24} color="#0000008c" onPress={() => {
-      setText("")
-      inputRef.current.blur()
-      }} />
-</View>
+      <Text className="text-center text-base font-bold w-auto">logo here</Text>
+      <Text className="text-center text-xs my-2 w-auto">search for your favourite regex pattern</Text>
+      <View className="flex bg-[#00000014] justify-center flex-row items-center mt-4 mb-4 rounded-xl px-4 focus:bg-white focus:border-2 focus:border-[#1967d2]">
+        <Ionicons
+          color="#0000008c"
+          selectionColor="#1967d2"
+          name="ios-search"
+          size={24}
+          className="m-2"
+        />
+        <TextInput
+          ref={inputRef}
+          selectionColor="#0000008c"
+          underlineColorAndroid="transparent"
+          className=" px-2 py-2 w-56 font-semibold text-lg text-[#0000008c] focus:bg-white focus:text-[#0000008c]"
+          placeholder="find your match"
+          onChangeText={(newText) => setText(newText)}
+          defaultValue={text}
+          onChange={handleSearch}
+          placeholderTextColor="#6161618c"
+        />
+        <MaterialIcons
+          name="cancel"
+          size={24}
+          color="#0000008c"
+          onPress={() => {
+            setText("");
+            inputRef.current.blur();
+          }}
+        />
+      </View>
+      <View
+      className="flex-row bg-slate-300 my-4 h-px w-56"
+/>
       {/* <TextInput
         selectionColor={"#000"}
         underlineColorAndroid={"#000"}
@@ -102,20 +115,20 @@ export default function App() {
         numColumns={2}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
-        horizontal={false} 
-        columnWrapperStyle={{justifyContent: 'space-between', flex: 1}} 
+        horizontal={false}
+        columnWrapperStyle={{ justifyContent: "space-between", flex: 1 }}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => {
-            console.log(item.name)
-            }}>
-          <Card className="w-1/2 max-w-1/2 my-2 h-24">
-            <Text className="text-xl w-36">
-              {item.name}
-            </Text>
-            <Text className="text-xs text-slate-400 font-medium py-2">
-              Click to open
-            </Text>
-          </Card>
+          <TouchableOpacity
+            onPress={() => {
+              console.log(item.name);
+            }}
+          >
+            <Card className="w-1/2 max-w-1/2 my-2 h-24">
+              <Text className="text-xl w-36">{item.name}</Text>
+              <Text className="text-xs text-slate-400 font-medium py-2">
+                Click to open
+              </Text>
+            </Card>
           </TouchableOpacity>
         )}
       />
@@ -128,25 +141,25 @@ export default function App() {
 const styles = StyleSheet.create({
   searchSection: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-},
-searchIcon: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
+  searchIcon: {
     padding: 10,
-},
-textInput: {
+  },
+  textInput: {
     flex: 1,
     paddingTop: 10,
     paddingRight: 10,
     paddingBottom: 10,
     paddingLeft: 0,
-    backgroundColor: '#fff',
-    color: '#424242',
-},
-droidSafeArea: {
-  flex: 1,
-  paddingTop: Platform.OS === 'android' ? 25 : 0
-},
+    backgroundColor: "#fff",
+    color: "#424242",
+  },
+  droidSafeArea: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? 25 : 0,
+  },
 });
