@@ -2,7 +2,7 @@
 
 Tasks - 
 
-- [ ] Modify text input box with icon (zomato, dunzo)
+- [x] Modify text input box with icon (zomato, dunzo)
 - [ ] Handle empty search
 - [ ] Search using filters
 - [ ] Implement debouncing for the search results
@@ -11,3 +11,7 @@ Tasks -
 - [ ] Share regex on social apps
 - [ ] Share a photo/screenshot of the regex pattern
 - [ ] Splashscreen (maybe animated?)
+- [ ] Add redux for state management (if not, use jotai/zustand)
+
+Basic Design - 
+
